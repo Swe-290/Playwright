@@ -1,0 +1,26 @@
+import {test,expect} from "@playwright/test";
+test("Project",async({page})=>{
+    await page.goto('https://www.saucedemo.com/')
+    await page.fill('#user-name','standard_user')
+    await page.fill ('#password','secret_sauce')
+    await page.locator('//input[@data-test="login-button"]').click()
+     await page.mouse.wheel(0,500)
+    await page.locator('//button[@data-test="add-to-cart-sauce-labs-onesie"]').click()
+    await page.locator('//button[@data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').click()
+    await page.mouse.wheel(0,-500)
+    await page.locator('//a[@data-test="shopping-cart-link"]').click()
+    await page.click('//button[@data-test="remove-test.allthethings()-t-shirt-(red)"]')
+    await page.click('#checkout')
+    await page.fill('#first-name','Swetha')
+    await page.keyboard.press("Tab")
+    await page.keyboard.insertText('Ragubathi')
+    await page.keyboard.press("Tab")
+    await page.keyboard.insertText("600052")
+    await page.click('#continue') 
+    await expect(page.locator('.summary_total_label')).toHaveText('Total: $8.63')
+    await page.click('#finish')
+    await page.screenshot({path:'C:/Users/Swetha/VS CODE/Playwright/tests/projscreen.png'+'fullpage.png',fullPage:true})
+
+    await page.waitForTimeout(5000)
+})
+
